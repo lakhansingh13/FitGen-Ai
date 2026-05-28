@@ -96,7 +96,8 @@ export default function AITrainer() {
       }
 
       // Initialize WebSocket
-      const wsUrl = `ws://127.0.0.1:8000/pose`;
+      const baseWsUrl = process.env.NEXT_PUBLIC_AI_WS_URL || 'ws://127.0.0.1:8000';
+      const wsUrl = `${baseWsUrl}/pose`;
       const ws = new WebSocket(wsUrl);
       wsRef.current = ws;
 
