@@ -22,7 +22,11 @@ const PORT = process.env.PORT || 5000;
 connectDB();
 
 // CORS configuration
-const allowedOrigins = ['http://localhost:3000', 'http://127.0.0.1:3000'];
+let allowedOrigins = ['http://localhost:3000', 'http://127.0.0.1:3000'];
+if (process.env.ALLOWED_ORIGINS) {
+  allowedOrigins = allowedOrigins.concat(process.env.ALLOWED_ORIGINS.split(',').map(o => o.trim()));
+}
+
 app.use(cors({
   origin: function(origin, callback) {
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
